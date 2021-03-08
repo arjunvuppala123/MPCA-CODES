@@ -1,24 +1,17 @@
-.data
-    STR: .ASCIZ "Hello World!"
-    LETTER: .ASCIZ "o"
-.text
-    LDR R0, =STR
-    LDR R1, =LETTER
-    LDRB R1, [R1]
-    MOV R2, #-1
-    MOV R3, #-1
-    loop:
-        LDRB R4, [R0]
-        CMP R4, #0
-        BEQ end
-        ADD R3, R3, #1
-        CMP R4, R1
-        BEQ found
-        ADD R0, R0, #1
-        B loop
-    found:
-        MOV R2, R3
-	ADD R0, R0, #1
-	B loop
-    end:
-        SWI 0x011
+.DATA
+A: .ASCIZ "HELLO WORLD"
+B: .ASCIZ "L";
+
+.TEXT
+LDR R1, =A;
+LDR R2, =B;
+MOV R5, #0;
+LDR R3, [R2];
+
+LOOP:
+        LDRB R0, [R1], #1;
+        CMP R0, R3;
+        ADDEQ R5, R5, #1;
+        CMP R0, #0;
+        BNE LOOP
+        SWI 0X11;
